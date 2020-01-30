@@ -20,6 +20,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'http://www.products.local/products',
-        'http://www.products.local/products/*'
+        'http://www.products.local/products/*',
+        'http://www.products.local/suppliers',
+        'http://www.products.local/suppliers/*'
     ];
 }

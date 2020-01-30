@@ -6,19 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Product;
 
+use DB;
+
 class ProductController extends Controller
-{
-  /*  public function index()
-    {
-      $products = \App\Product::all();
-
-      return view('product.index', compact('products'));
-    }*/
-
-//Insert Data  into DB with API
+{//Insert Data  into DB with API
     public function create(Request $request)
     {
       $products = new Product();
+      $products->supplier_id = $request->input('supplier_id');
       $products->type = $request->input('type');
       $products->pricePerkilo = $request->input('pricePerkilo');
       $products->quantityInstock = $request->input('quantityInstock');
@@ -34,6 +29,9 @@ class ProductController extends Controller
 //Read/Fetch Data by ID from DB
     public function getProductById($id)
     {
+      DB::table('suppliers')
+      ->leftJoin('products', 'products.supplier_id', '=', 'suppliers.id')
+      ->select('products.*', 'suppliers.name', 'suppliers.location');
       $products = Product::find($id);
       return response()->json($products);
     }
@@ -41,6 +39,7 @@ class ProductController extends Controller
     public function updateProduct(Request $request, $id)
     {
       $products = Product::find($id);
+      $products->supplier_id = $request->input('supplier_id');
       $products->type = $request->input('type');
       $products->pricePerkilo = $request->input('pricePerkilo');
       $products->quantityInstock = $request->input('quantityInstock');
@@ -54,5 +53,4 @@ class ProductController extends Controller
       $products->delete();
       return response()->json($products);
     }
-
  }

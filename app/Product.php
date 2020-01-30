@@ -8,5 +8,10 @@ class Product extends Model
 {
     protected $table = 'products';
 
-    protected $fillable = ['type','pricePerkilo','quantityInstock'];
+    protected $fillable = ['supplier_id','type','pricePerkilo','quantityInstock'];
+
+    public function suppliers()
+    {
+      return $this->belongsTo(\App\Supplier::class);
+    }
 }

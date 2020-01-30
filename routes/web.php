@@ -14,19 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/hello', function () {
-    return view('hello');
-});
-
-Route :: get('/greeting/{crop}', 'GrainsController@mbegu');
-
-Route :: post('/grr', 'GrainsController@brr');
-
-Route ::get('/products', 'ProductController@index');
-//API CRUD
+//API CRUD FOR PRODUCTS
 Route ::post('/products', 'ProductController@create');
 Route ::get('/products', 'ProductController@getProducts');
 Route ::get('/products/{id}', 'ProductController@getProductById');
 Route ::put('/products/{id}', 'ProductController@updateProduct');
 Route ::delete('/products/{id}', 'ProductController@deleteProduct');
+//API CRUD FOR SUPPLIERS
+Route ::post('/suppliers', 'SupplierController@create');
+Route ::get('/suppliers', 'SupplierController@getSuppliers');
+Route ::get('/suppliers/{id}', 'SupplierController@getSupplierById');
+Route ::put('/suppliers/{id}', 'SupplierController@updateSupplier');
+Route ::delete('/suppliers/{id}', 'SupplierController@deleteSupplier');
